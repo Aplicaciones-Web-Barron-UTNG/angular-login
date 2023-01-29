@@ -29,23 +29,23 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Introducción
 En éste pequeño ejemplo se creará una aplicación para registro e ingreso de un usuario.
 
-## Proyecto de Login.
-## 1. Generar el proyecto Angular
+## Primera parte crear la interfaz de usuario de Login.
+### 1. Generar el proyecto Angular
 ~~~
 ng new login
 ~~~
 - Es necesario seleccionar un módulo de routing.
 - Utilizar el estilo **SCSS**.
 
-## 2. Instalar los módulos
+### 2. Instalar los módulos
 Cambiarse al directorio recien creado en el punto 1 e instalar los módulos default cuando se instalar la aplicación.
 ~~~
 cd login
 npm install
 ~~~
 
-## 3. Agregar los componentes login y registro
-Mediante la terminal agregar las instrucciones
+### 3. Agregar los componentes login y registro
+Mediante la terminal agregar las instrucciones, vease [Components](https://angular.io/guide/component-overview)
 ~~~
  ng g c components/login
  ng g c components/register
@@ -53,7 +53,9 @@ Mediante la terminal agregar las instrucciones
 
 ![image](https://user-images.githubusercontent.com/8560750/215362677-e296d9ea-87bd-4f24-b361-ccf07c95bf6f.png)
 
-## 3. Definir las rutas de login y registro
+### 4. Definir las rutas de login y registro
+La idea inicial es tener tres rutas: ** Home, Login,  y Register**.
+
 Modificar el archivo app-routing.module.ts, sino recuerda el ruteo vea lla siguiente referencia [Routes](https://angular.io/api/router/Route)
 ~~~
 import { NgModule } from '@angular/core';
@@ -73,5 +75,38 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+~~~
+
+### 5. Agregar el módulo FormsComponent
+Abrir y modificar el archivo app.module.ts
+- Configuración de los módulos Login y Register recién creados.
+- Agregar el módulo FormsModule para el manejo de formularios.
+
+~~~
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule, 
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ~~~
 
