@@ -29,12 +29,49 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Introducción
 En éste pequeño ejemplo se creará una aplicación para registro e ingreso de un usuario.
 
-## Generando el proyecto
+## Proyecto de Login.
+## 1. Generar el proyecto Angular
 ~~~
 ng new login
 ~~~
 - Es necesario seleccionar un módulo de routing.
 - Utilizar el estilo **SCSS**.
 
+## 2. Instalar los módulos
+Cambiarse al directorio recien creado en el punto 1 e instalar los módulos default cuando se instalar la aplicación.
+~~~
+cd login
+npm install
+~~~
 
+## 3. Agregar los componentes login y registro
+Mediante la terminal agregar las instrucciones
+~~~
+ ng g c components/login
+ ng g c components/register
+~~~
+
+![image](https://user-images.githubusercontent.com/8560750/215362677-e296d9ea-87bd-4f24-b361-ccf07c95bf6f.png)
+
+## 3. Definir las rutas de login y registro
+Modificar el archivo app-routing.module.ts, sino recuerda el ruteo vea lla siguiente referencia [Routes](https://angular.io/api/router/Route)
+~~~
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
+const routes: Routes = [
+  {path:'', component:AppComponent, pathMatch:'full'},
+  {path:'login', component:LoginComponent, pathMatch:'full'},
+  {path:'register', component:RegisterComponent, pathMatch: 'full'}
+];  
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+~~~
 
