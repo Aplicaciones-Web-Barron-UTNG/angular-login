@@ -110,3 +110,79 @@ import { FormsModule } from '@angular/forms';
 export class AppModule { }
 ~~~
 
+### 6. Componente Login
+Modificar el archivo login.component.html
+~~~
+<div class="login">
+  <form action="" class="form-login">
+    <h1>Ingresar</h1>
+    <input type="text" name="email" [(ngModel)]="email" placeholder="Email" required="required" />
+    <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required="required">
+
+    <button type="submit" (click)="login()">Ingresar</button>
+  </form>
+</div>
+~~~
+
+Definir el estilo del componente login.component.scss
+~~~
+.login {
+    text-align: center;
+}
+.form-login {
+    background-color: orange;
+    border-radius: 15px;
+    margin-top: 10%;
+    min-width: 300px;
+    min-height: 250px;
+    max-width: 60%;
+    margin: 0px auto;
+}
+
+.form-login input {
+    display: block;
+    margin: 2rem;
+    padding: 1rem;
+    width: 80%;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+      rgba(0, 0, 0, 0.1);
+      background: #ebf5fc;
+}
+
+.form-login button {
+    display: block;
+    border-radius: 15px;
+    border: 0px solid;
+    background-color: rgb(177, 163, 228);
+    font-size: large;
+    text-transform: uppercase;
+    padding: 1rem;
+    width: 100%;
+}
+~~~
+
+Definir el componente login.component.ts
+~~~
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent {
+  email:string; //Captura de email
+  password:string;  //Captura de password
+
+  constructor() { //Inicializar los dos atributos
+    this.email = '';
+    this.password = ''
+  }
+
+  login() {  //Función para evento clic
+    console.log('Email: ' + this.email);
+    console.log('Password: ' + this.password);
+  }
+}
+
+~~~
