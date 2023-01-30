@@ -124,7 +124,51 @@ ng serve
 ~~~
 
 Invocar la funcionalidad en [Login](http://localhost:4200/login)
-Ingresar usuario: eve.holt@reqres.in  password: cityslicka
+Ingresar usuario: **eve.holt@reqres.in**  password: **cityslicka**
+Verificar en el navegador el token
+
+### 7. Registro de usuario
+Modificar nuevamente el servicio users.service.ts
 ~~~
+  register(user: any): Observable<any> {
+    return this.http.post("https://reqres.in/api/register", user);
+  }
+~~~
+
+Modificar el componente register.component.ts
+~~~
+import { Component } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
+})
+export class RegisterComponent {
+  email:string; //Captura de email
+  password:string;  //Captura de password
+  confirmPassword:string;
+  passwordError: boolean;
+
+  constructor(public userService: UsersService) { //Inicializar los dos atributos
+    this.email = '';
+    this.password = ''
+    this.confirmPassword = '';
+    this.passwordError = false;
+  }
+
+  register() {  //Función para evento clic
+    console.log('Email: ' + this.email);
+    console.log('Password: ' + this.password);
+    console.log('Confirm Password: ' + this.confirmPassword);
+
+    const user = {email: this.email, password:this.password};
+
+    this.userService.register(user).subscribe(data => {
+      console.log(data);
+    });
+  }
+}
 
 ~~~
