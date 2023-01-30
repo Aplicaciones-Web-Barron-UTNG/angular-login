@@ -29,63 +29,69 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Introducción
 En éste pequeño ejemplo se creará una aplicación para registro e ingreso de un usuario.
 
-## Primera parte crear la interfaz de usuario de Login.
-### 1. Generar el proyecto Angular
+## Segunda parte crear la interfaz de usuario de Login.
+### Creando servicio de usuarios
+Para mayor referencia véase [Services](https://angular.io/guide/creating-injectable-service)
 ~~~
-ng new login
-~~~
-- Es necesario seleccionar un módulo de routing.
-- Utilizar el estilo **SCSS**.
-
-### 2. Instalar los módulos
-Cambiarse al directorio recien creado en el punto 1 e instalar los módulos default cuando se instalar la aplicación.
-~~~
-cd login
-npm install
+ng g s services/users
 ~~~
 
-### 3. Agregar los componentes login y registro
-Mediante la terminal agregar las instrucciones, vease [Components](https://angular.io/guide/component-overview)
+Vamos a utilizar el API [REQURES](https://reqres.in/)
 ~~~
- ng g c components/login
- ng g c components/register
-~~~
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
-![image](https://user-images.githubusercontent.com/8560750/215362677-e296d9ea-87bd-4f24-b361-ccf07c95bf6f.png)
-
-### 4. Definir las rutas de login y registro
-La idea inicial es tener tres rutas: ** Home, Login,  y Register**.
-
-Modificar el archivo app-routing.module.ts, sino recuerda el ruteo vea lla siguiente referencia [Routes](https://angular.io/api/router/Route)
-~~~
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-
-const routes: Routes = [
-  {path:'', component:AppComponent, pathMatch:'full'},
-  {path:'login', component:LoginComponent, pathMatch:'full'},
-  {path:'register', component:RegisterComponent, pathMatch: 'full'}
-];  
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+@Injectable({
+  providedIn: 'root'
 })
-export class AppRoutingModule { }
+export class UsersService {
+
+  constructor(private http: HttpClient) { }
+
+  login(user:any): Observable<any> {
+    return this.http.post("https://reqres.in/api/login", user);
+  }
+}
 ~~~
 
-### 5. Agregar el módulo FormsComponent
-Abrir y modificar el archivo app.module.ts
-- Configuración de los módulos Login y Register recién creados.
-- Agregar el módulo FormsModule para el manejo de formularios.
+Codificamos el componente login.component.ts
+~~~
+import { Component } from '@angular/core';
+import {UsersService} from '../../services/users.service';
 
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent {
+  email:string; //Captura de email
+  password:string;  //Captura de password
+
+  constructor(public userService:UsersService) { //Inicializar los dos atributos
+    this.email = '';
+    this.password = ''
+  }
+
+  login() {  //Función para evento clic
+    const user = {email:this.email, password:this.password};
+
+    this.userService.login(user).subscribe(data => {
+      console.log(data);
+    });
+
+    console.log('Email: ' + this.email);
+    console.log('Password: ' + this.password);
+  }
+}
+~~~
+
+Abrir el archivo app.module.ts y agregar el módulo     HttpClientModule
 ~~~
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -102,163 +108,23 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-~~~
-
-### 6. Componente Login
-![image](https://user-images.githubusercontent.com/8560750/215365502-9a1cd5e3-7c26-45c8-aa7b-355ef42a5ba2.png)
-
-Definir el estilo general de las dos formas en styles.scss
-~~~
-.form-custom {
-    background-color: orange;
-    border-radius: 15px;
-    margin-top: 10%;
-    min-width: 300px;
-    min-height: 250px;
-    max-width: 60%;
-    margin: 0px auto;
-}
-
-.form-custom input {
-    display: block;
-    margin: 2rem;
-    padding: 1rem;
-    width: 80%;
-    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
-      rgba(0, 0, 0, 0.1);
-      background: #ebf5fc;
-}
-
-.form-custom button {
-    display: block;
-    border-radius: 15px;
-    border: 0px solid;
-    background-color: rgb(177, 163, 228);
-    font-size: large;
-    text-transform: uppercase;
-    padding: 1rem;
-    width: 100%;
-}
 
 ~~~
 
-Modificar el archivo login.component.html
+Levantar el servidor 
 ~~~
-<div class="login">
-  <form action="" class="form-custom">
-    <h1>Ingresar</h1>
-    <input type="text" name="email" [(ngModel)]="email" placeholder="Email" required="required" />
-    <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required="required">
-
-    <button type="submit" (click)="login()">Ingresar</button>
-  </form>
-</div>
+ng serve
 ~~~
 
-Definir el estilo del componente login.component.scss
+Invocar la funcionalidad en [Login](http://localhost:4200/login)
+Ingresar usuario: eve.holt@reqres.in  password: cityslicka
 ~~~
-.login {
-    text-align: center;
-}
-~~~
-
-Definir el componente login.component.ts
-~~~
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
-})
-export class LoginComponent {
-  email:string; //Captura de email
-  password:string;  //Captura de password
-
-  constructor() { //Inicializar los dos atributos
-    this.email = '';
-    this.password = ''
-  }
-
-  login() {  //Función para evento clic
-    console.log('Email: ' + this.email);
-    console.log('Password: ' + this.password);
-  }
-}
-
-~~~
-
-### 7. Register
-Modificar la interfaz de usuario, para ello abrir el archivo register.component.html
-~~~
-<div class="register">
-  <form class="form-custom">
-    <h1>Registrar</h1>
-    <input
-      type="text"
-      name="email"
-      [(ngModel)]="email"
-      placeholder="Email"
-      required="required"
-    />
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="password"
-      placeholder="Password"
-      required="required"
-    />
-    <input
-      type="password"
-      [(ngModel)]="confirmPassword"
-      name="password"
-      placeholder="Repeat the password"
-      required="required"
-    />
-    <button type="submit" (click)="register()">Ingresar</button>
-  </form>
-</div>
-
-~~~
-
-Modificar el archivo de estilo register.componente.scss
-~~~
-.register {
-    text-align: center;
-}
-~~~
-
-Modificar el archivo register.component.ts
-~~~
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
-})
-export class RegisterComponent {
-  email:string; //Captura de email
-  password:string;  //Captura de password
-  confirmPassword:string;
-
-  constructor() { //Inicializar los dos atributos
-    this.email = '';
-    this.password = ''
-    this.confirmPassword = '';
-  }
-
-  register() {  //Función para evento clic
-    console.log('Email: ' + this.email);
-    console.log('Password: ' + this.password);
-    console.log('Confirm Password: ' + this.confirmPassword);
-  }
-}
 
 ~~~
