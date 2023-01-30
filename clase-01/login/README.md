@@ -111,10 +111,47 @@ export class AppModule { }
 ~~~
 
 ### 6. Componente Login
+![image](https://user-images.githubusercontent.com/8560750/215365502-9a1cd5e3-7c26-45c8-aa7b-355ef42a5ba2.png)
+
+Definir el estilo general de las dos formas en styles.scss
+~~~
+.form-custom {
+    background-color: orange;
+    border-radius: 15px;
+    margin-top: 10%;
+    min-width: 300px;
+    min-height: 250px;
+    max-width: 60%;
+    margin: 0px auto;
+}
+
+.form-custom input {
+    display: block;
+    margin: 2rem;
+    padding: 1rem;
+    width: 80%;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+      rgba(0, 0, 0, 0.1);
+      background: #ebf5fc;
+}
+
+.form-custom button {
+    display: block;
+    border-radius: 15px;
+    border: 0px solid;
+    background-color: rgb(177, 163, 228);
+    font-size: large;
+    text-transform: uppercase;
+    padding: 1rem;
+    width: 100%;
+}
+
+~~~
+
 Modificar el archivo login.component.html
 ~~~
 <div class="login">
-  <form action="" class="form-login">
+  <form action="" class="form-custom">
     <h1>Ingresar</h1>
     <input type="text" name="email" [(ngModel)]="email" placeholder="Email" required="required" />
     <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required="required">
@@ -128,36 +165,6 @@ Definir el estilo del componente login.component.scss
 ~~~
 .login {
     text-align: center;
-}
-.form-login {
-    background-color: orange;
-    border-radius: 15px;
-    margin-top: 10%;
-    min-width: 300px;
-    min-height: 250px;
-    max-width: 60%;
-    margin: 0px auto;
-}
-
-.form-login input {
-    display: block;
-    margin: 2rem;
-    padding: 1rem;
-    width: 80%;
-    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
-      rgba(0, 0, 0, 0.1);
-      background: #ebf5fc;
-}
-
-.form-login button {
-    display: block;
-    border-radius: 15px;
-    border: 0px solid;
-    background-color: rgb(177, 163, 228);
-    font-size: large;
-    text-transform: uppercase;
-    padding: 1rem;
-    width: 100%;
 }
 ~~~
 
@@ -182,6 +189,75 @@ export class LoginComponent {
   login() {  //Función para evento clic
     console.log('Email: ' + this.email);
     console.log('Password: ' + this.password);
+  }
+}
+
+~~~
+
+### 7. Register
+Modificar la interfaz de usuario, para ello abrir el archivo register.component.html
+~~~
+<div class="register">
+  <form class="form-custom">
+    <h1>Registrar</h1>
+    <input
+      type="text"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Email"
+      required="required"
+    />
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="Password"
+      required="required"
+    />
+    <input
+      type="password"
+      [(ngModel)]="confirmPassword"
+      name="password"
+      placeholder="Repeat the password"
+      required="required"
+    />
+    <button type="submit" (click)="register()">Ingresar</button>
+  </form>
+</div>
+
+~~~
+
+Modificar el archivo de estilo register.componente.scss
+~~~
+.register {
+    text-align: center;
+}
+~~~
+
+Modificar el archivo register.component.ts
+~~~
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
+})
+export class RegisterComponent {
+  email:string; //Captura de email
+  password:string;  //Captura de password
+  confirmPassword:string;
+
+  constructor() { //Inicializar los dos atributos
+    this.email = '';
+    this.password = ''
+    this.confirmPassword = '';
+  }
+
+  register() {  //Función para evento clic
+    console.log('Email: ' + this.email);
+    console.log('Password: ' + this.password);
+    console.log('Confirm Password: ' + this.confirmPassword);
   }
 }
 
