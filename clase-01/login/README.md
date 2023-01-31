@@ -255,3 +255,10 @@ export class RegisterComponent {
 }
 
 ~~~
+
+### 8. Deployarlo en StackBlitz
+1. Ingresar a la URL [StackBlitz](https://stackblitz.com/)
+2. Pero primeramente agregar la instrucción `import 'zone.js';` en archivo `main.ts`
+
+### 9. Completando la Práctica
+A. Modificar el archivo de tal manera que tenga un menú en la parte superior, un slider y un footer.
