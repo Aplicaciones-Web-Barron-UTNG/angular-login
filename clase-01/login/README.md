@@ -28,6 +28,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Introducción
 En éste pequeño ejemplo se creará una aplicación para registro e ingreso de un usuario.
+![image](https://user-images.githubusercontent.com/8560750/215658585-80c50000-3da3-4967-a262-915f2380bd99.png)
+
 
 ## Primera parte crear la interfaz de usuario de Login.
 ### 1. Generar el proyecto Angular
@@ -45,42 +47,33 @@ npm install
 ~~~
 
 ### 3. Agregar los componentes login y registro
-Mediante la terminal agregar las instrucciones, vease [Components](https://angular.io/guide/component-overview)
+Mediante la terminal agregar las siguientes instrucciones para la creación de los componentes de `Login` y `Register`, vease [Components](https://angular.io/guide/component-overview) para un mejor entendimiento
 ~~~
  ng g c components/login
  ng g c components/register
 ~~~
+Observa que se crea una carpeta llamada `components` dentro de la carpeta `src\app`
 
 ![image](https://user-images.githubusercontent.com/8560750/215362677-e296d9ea-87bd-4f24-b361-ccf07c95bf6f.png)
 
 ### 4. Definir las rutas de login y registro
 La idea inicial es tener tres rutas: ** Home, Login,  y Register**.
 
-Modificar el archivo app-routing.module.ts, sino recuerda el ruteo vea lla siguiente referencia [Routes](https://angular.io/api/router/Route)
+Modificar el archivo `app-routing.module.ts` para agregar las rutas o paths, sino recuerda el ruteo vea la siguiente referencia [Routes](https://angular.io/api/router/Route)
+
 ~~~
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {path:'', component:AppComponent, pathMatch:'full'},
   {path:'login', component:LoginComponent, pathMatch:'full'},
   {path:'register', component:RegisterComponent, pathMatch: 'full'}
 ];  
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
 ~~~
 
 ### 5. Agregar el módulo FormsComponent
-Abrir y modificar el archivo app.module.ts
-- Configuración de los módulos Login y Register recién creados.
-- Agregar el módulo FormsModule para el manejo de formularios.
+Abrir y modificar el archivo `app.module.ts`
+- Observa la configuración de los módulos Login y Register recién creados en la sección declarations
+- Agregar el módulo FormsModule para el manejo de formularios a través `import { FormsModule } from '@angular/forms';` e importarlo dentro de la importación del @NgModule
 
 ~~~
 import { NgModule } from '@angular/core';
@@ -113,7 +106,7 @@ export class AppModule { }
 ### 6. Componente Login
 ![image](https://user-images.githubusercontent.com/8560750/215365502-9a1cd5e3-7c26-45c8-aa7b-355ef42a5ba2.png)
 
-Definir el estilo general de las dos formas en styles.scss
+Definir el estilo general de las dos formas en `styles.scss`
 ~~~
 .form-custom {
     background-color: orange;
@@ -132,7 +125,7 @@ Definir el estilo general de las dos formas en styles.scss
     width: 80%;
     box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
       rgba(0, 0, 0, 0.1);
-      background: #ebf5fc;
+    background: #ebf5fc;
 }
 
 .form-custom button {
@@ -148,7 +141,7 @@ Definir el estilo general de las dos formas en styles.scss
 
 ~~~
 
-Modificar el archivo login.component.html
+Modificar el archivo `login.component.html` para indicar las etiquetas HTML dentro de la forma
 ~~~
 <div class="login">
   <form action="" class="form-custom">
@@ -161,14 +154,14 @@ Modificar el archivo login.component.html
 </div>
 ~~~
 
-Definir el estilo del componente login.component.scss
+Definir el estilo del componente `login.component.scss`
 ~~~
 .login {
     text-align: center;
 }
 ~~~
 
-Definir el componente login.component.ts
+Definir el componente `login.component.ts` que hara el enlace con la forma a través de los atributos email y password
 ~~~
 import { Component } from '@angular/core';
 
@@ -195,7 +188,7 @@ export class LoginComponent {
 ~~~
 
 ### 7. Register
-Modificar la interfaz de usuario, para ello abrir el archivo register.component.html
+Modificar la interfaz de usuario, para ello abrir el archivo `register.component.html` donde se capturará datos para el registro de usuarios
 ~~~
 <div class="register">
   <form class="form-custom">
@@ -227,14 +220,14 @@ Modificar la interfaz de usuario, para ello abrir el archivo register.component.
 
 ~~~
 
-Modificar el archivo de estilo register.componente.scss
+Modificar el archivo de estilo `register.componente.scss`
 ~~~
 .register {
     text-align: center;
 }
 ~~~
 
-Modificar el archivo register.component.ts
+Modificar el archivo `register.component.ts`
 ~~~
 import { Component } from '@angular/core';
 
