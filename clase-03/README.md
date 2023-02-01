@@ -70,12 +70,40 @@ Para una mayor referencia [Véase](https://github.com/auth0-samples/auth0-angula
 npm install @auth0/auth0-angular
 ~~~
 
+6. Abrir archivo `app.module.ts`
+- importar el `AuthModule` del paquete `@auth0/auth0-angular`
+- Agregar `AuthModule` a la aplicación llamando AuthModule.forRoot y agregar a la matriz `imports` de módulo de aplicación 
+
+~~~
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    HighlightModule,
+    FontAwesomeModule,
+    // Import the module into the application, with configuration
+    AuthModule.forRoot({
+      domain: 'dev-tz43a35eoik3buw2.us.auth0.com',
+      clientId: 'BHTtRTn7cOCnT8eI4b95pKgV9WWPSDZm'
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
+    }),
+  ],
+~~~
+
+Verificar que el ID Cliente corresponde con los datos de configuración de la aplicación.
+
 6. Ejecutar aplicación
 ~~~
 ng serve -o
 ~~~
 
+![image](https://user-images.githubusercontent.com/8560750/215934263-bb0e0973-d821-4cfb-a94b-9e6c0b7da25d.png)
 
+7. 
 
 
 
