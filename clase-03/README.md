@@ -9,8 +9,43 @@
 5. Seleccionar opción Applications|Create Apllications
 ![image](https://user-images.githubusercontent.com/8560750/215930625-502680e0-a889-4e88-8eee-49b643f3a242.png)
 
-6. Ingresar un nombre o un tipo de aplicación
+6. Ingresar un nombre o un tipo de aplicación, al finalizar dar clic en **Create**
 ![image](https://user-images.githubusercontent.com/8560750/215930810-08fae125-3520-46a1-97fc-dbe4aa7ca362.png)
+
+7. Seleccionar la tecnología Angular
+![image](https://user-images.githubusercontent.com/8560750/215931012-8e6d3d7c-c38f-46ec-bf9c-54d5bd01c893.png)
+
+8.Inspeccionar el tab **Settings**, los datos a tomar en cuenta es el `Domain` y `Client ID`
+![image](https://user-images.githubusercontent.com/8560750/215931174-709ccab1-1c08-478e-99e4-97de22bc8645.png)
+
+9. Seleccionar el tab `Quick Start` y descarga la aplicación de ejemplo.
+
+![image](https://user-images.githubusercontent.com/8560750/215931777-62c54266-42d2-421d-8c7b-cd8d957c870b.png)
+
+10. Descomprimir el archivo `angular-01-login`.
+11. Abrir consola y ubicarse en carpeta recien descomprimida.
+12. Cambiarse al directorio `sample` recien creado
+
+## Configurar aplicación de ejemplo
+Para una mayor referencia [Véase](https://github.com/auth0-samples/auth0-angular-samples)
+
+1. Abrir Visual Studio Code en la carpeta sample.
+![image](https://user-images.githubusercontent.com/8560750/215932467-f58472a6-bd5d-44b7-a361-e5955133d093.png)
+
+2. Modificar archivo `auth_config.jsn`, la ventaja de descomprimirlo es que le agrega dichos datos.
+~~~
+{
+  "domain": "dev-tz43a35eoik3buw2.us.auth0.com",
+  "clientId": "BHTtRTn7cOCnT8eI4b95pKgV9WWPSDZm",
+  "authorizationParams": {
+    "audience": "YOUR_API_IDENTIFIER"
+  },
+  "apiUri": "http://localhost:3001",
+  "appUri": "http://localhost:4200",
+  "errorPath": "/error"
+}
+~~~
+3.
 
 
 
