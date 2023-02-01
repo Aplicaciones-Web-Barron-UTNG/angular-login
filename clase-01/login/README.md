@@ -261,4 +261,6 @@ export class RegisterComponent {
 2. Pero primeramente agregar la instrucción `import 'zone.js';` en archivo `main.ts`
 
 ### 9. Completando la Práctica
-A. Modificar el archivo de tal manera que tenga un menú en la parte superior, un slider y un footer.
+A. Modificar el archivo de tal manera que tenga un menú en la parte superior, un slider y un footer (creando un componente).
+B. La personalización es personal.
+C. Subirlo a StackBlitz.
