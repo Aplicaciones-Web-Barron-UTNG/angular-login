@@ -45,7 +45,40 @@ Para una mayor referencia [Véase](https://github.com/auth0-samples/auth0-angula
   "errorPath": "/error"
 }
 ~~~
-3.
+
+3. El identificador lo copiamos la opción APIs
+![image](https://user-images.githubusercontent.com/8560750/215933107-b944c3c2-4169-45d6-b429-de6a9d41dda5.png)
+
+~~~
+{
+  "domain": "dev-tz43a35eoik3buw2.us.auth0.com",
+  "clientId": "BHTtRTn7cOCnT8eI4b95pKgV9WWPSDZm",
+  "authorizationParams": {
+    "audience": "https://dev-tz43a35eoik3buw2.us.auth0.com/api/v2/"
+  },
+  "apiUri": "http://localhost:3001",
+  "appUri": "http://localhost:4200",
+  "errorPath": "/error"
+}
+~~~
+
+4. Asegurarse también de que la aplicación en Auth0 esté configurada para permitir http://localhost:4200 como Callback URL, Logout URLy Allowed Web Origin.
+![image](https://user-images.githubusercontent.com/8560750/215933563-475aa443-4484-4106-ade9-2bb3ef5429b6.png)
+
+5. Instalar Auth0 Angular SDK
+~~~
+npm install @auth0/auth0-angular
+~~~
+
+6. Ejecutar aplicación
+~~~
+ng serve -o
+~~~
+
+
+
+
+
 
 
 
